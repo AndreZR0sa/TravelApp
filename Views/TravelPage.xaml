@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TravelApp.Views.TravelPage"
+             xmlns:viewmodels="clr-namespace:TravelApp.ViewModels"
+             xmlns:models="clr-namespace:TravelApp.Models"
+             x:DataType="viewmodels:TravelViewModel"
+             BackgroundColor="#FFF"
+             Shell.NavBarIsVisible="False"
+             Title="TravelPage">
+
+    <Grid RowDefinitions="*, Auto, Auto" Padding="5,10">
+        <CarouselView Grid.Row="0"
+                      Position="{Binding Position}"
+                      IndicatorView="Indicator"
+                      Loop="False"
+                      ItemsSource="{Binding Itens}">
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:TravelItem">
+                    <VerticalStackLayout VerticalOptions="Center"
+                                         Spacing="20">
+
+                        <Image
+                            Source="{Binding ImageUrl}"
+                            Aspect="AspectFit"
+                            HeightRequest="250"
+                            />
+                        <Label
+                            Text="{Binding Title}"
+                            FontSize="32"
+                            HorizontalTextAlignment="Center"
+                            TextColor="#000"
+                            FontFamily="ElMessiriBold"
+                            />
+                        <Label
+                            Text="{Binding Description}"
+                            FontSize="16"
+                            HorizontalTextAlignment="Center"
+                            TextColor="#000"
+                            FontFamily="ElMessiriRegular"
+                            />
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <IndicatorView x:Name="Indicator"
+               Grid.Row="1"
+               HorizontalOptions="Center"
+               IndicatorColor="#FFE3ED"
+               SelectedIndicatorColor="#FF1568"
+               IndicatorSize="14"
+               />
+
+        <Grid Grid.Row="2" 
+      ColumnDefinitions="*,*"
+      ColumnSpacing="15" >
+
+            <Button Grid.Column="0"
+            Text="Get Started"
+            BackgroundColor="#FF1568"
+            FontFamily="ElMessiriSemibold"
+            Margin="0,65,0,62"
+            WidthRequest="159"
+            HeightRequest="53"
+            FontSize="20"/>
+
+            <Button Grid.Column="1"
+            Command="{Binding NextCommand}"
+            Text="Next"
+            Margin="0,65,0,62"
+            WidthRequest="101"
+            HeightRequest="53"
+            BackgroundColor="#4EA717"
+            IsVisible="{Binding ShowButton}"
+            FontFamily="ElMessiriSemibold"
+            FontSize="20"/>
+
+        </Grid>
+    </Grid>
+    
+</ContentPage>
